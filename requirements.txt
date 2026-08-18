@@ -1,0 +1,30 @@
+# HippoActInteract dependencies (Python 3.12)
+#
+# Preferred (isolated, easy to delete):
+#   docker compose build
+#   docker compose run --rm pipeline
+#   docker compose down --rmi all -v --remove-orphans
+#
+# torch is installed from the CPU wheel index in the Dockerfile:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+# Do not list torch here — PyPI linux/aarch64 torch>=2.13 pulls NVIDIA CUDA libs.
+#
+# The Docker image is linux/arm64 CPU. Metal (MPS) cannot run in Docker Desktop.
+# Do NOT use the CUDA PyG wheel index (https://data.pyg.org/whl/...).
+# torch-geometric >= 2.5 uses native PyTorch fallbacks, so torch-scatter
+# and torch-sparse are intentionally omitted.
+
+torch-geometric>=2.5.0
+
+transformers>=4.40.0
+accelerate>=0.30.0
+
+networkx>=3.2
+pandas>=2.2
+numpy>=1.26
+scikit-learn>=1.4
+requests>=2.31
+tqdm>=4.66
+matplotlib>=3.8
+
+pytest>=8.0

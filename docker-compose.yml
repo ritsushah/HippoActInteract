@@ -1,0 +1,25 @@
+name: hippoact
+
+services:
+  pipeline:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: hippoact:latest
+    platform: linux/arm64
+    working_dir: /app
+    environment:
+      HIPPO_DEVICE: cpu
+      PYTHONUNBUFFERED: "1"
+      PYTHONPATH: /app
+      HF_HOME: /app/.cache/huggingface
+    volumes:
+      - ./data:/app/data
+      - ./src:/app/src
+      - ./tests:/app/tests
+      - ./figures:/app/figures
+      - hf_cache:/app/.cache/huggingface
+    command: ["pytest", "tests/test_device.py", "-v", "--log-cli-level=INFO"]
+
+volumes:
+  hf_cache:
